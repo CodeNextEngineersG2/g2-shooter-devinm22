@@ -41,14 +41,16 @@ var alienBulletY;
  */
 function setup() {
   canvas = createCanvas(500, 400);
-  background(20, 30, 40);
+  background(131, 173, 157);
   gameScreen = select("#game-screen");
   canvas.parent(gameScreen);
-  shipColor = "#fffa00";
+  shipColor = "#00ff11"
   shipDiameter = 80;
   shipX = width / 2;
   shipY = height - shipDiameter / 2;
   shipSpeed = 6;
+  bulletDiameter = 30;
+
 }
 
 /*
@@ -72,8 +74,9 @@ function setup() {
  * if the game is running.
  */
 function draw(){
-  background(20, 30, 40);
+  background(131, 173, 157);
   drawShip();
+  drawBullet();
 }
 /*
  * drawShip()
@@ -93,8 +96,6 @@ function drawShip() {
   ellipse(shipX, shipY, shipDiameter, shipDiameter);
 }
 
-
-
 /*
  * keyPressed()
  * This function runs automatically when the player presses the spacebar
@@ -103,7 +104,13 @@ function drawShip() {
  * ship. Then it sets the "shipShooting" variable to "true", indicating a ship
  * bullet is currently being fired.
  */
+function keyPressed() {
+  if(keyCode === 32){
+    bulletX = shipX;
+    bulletY = shipY;
 
+  }
+}
 
 /*
  * drawBullet()
@@ -112,7 +119,10 @@ function drawShip() {
  * and the player earns a point. The alien aslo becomes faster (i.e., harder
  * to hit) each time it is hit by a bullet.
  */
-
+function drawBullet() {
+  fill ("#1f3521");
+  ellipse(bulletX, bulletY, bulletDiameter, bulletDiameter);
+}
 
 /*
  * drawAlien()
