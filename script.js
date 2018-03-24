@@ -50,6 +50,7 @@ function setup() {
   shipY = height - shipDiameter / 2;
   shipSpeed = 6;
   bulletDiameter = 30;
+  shipShooting = false;
 
 }
 
@@ -105,9 +106,10 @@ function drawShip() {
  * bullet is currently being fired.
  */
 function keyPressed() {
-  if(keyCode === 32){
+  if(keyCode === 32 && !shipShooting){
     bulletX = shipX;
     bulletY = shipY;
+    shipShooting = true;
 
   }
 }
@@ -120,8 +122,14 @@ function keyPressed() {
  * to hit) each time it is hit by a bullet.
  */
 function drawBullet() {
-  fill ("#1f3521");
-  ellipse(bulletX, bulletY, bulletDiameter, bulletDiameter);
+  if(bulletY > 0){
+    fill ("#1f3521");
+    ellipse(bulletX, bulletY, bulletDiameter, bulletDiameter);
+    bulletY -= 10;
+    }
+    else {
+      shipShooting = false;
+    }
 }
 
 /*
